@@ -1,37 +1,35 @@
 import React, { useState } from "react";
-import Table from "../../utils/ProductTable";
-const headers = ["Id", "Product Name", "CreatedAt", "ProductType"];
-import { useGetAllProductsQuery } from "../../features/products/products-service";
-import { useAddProductMutation } from "../../features/products/products-service";
+import ProuductTypeTable from "../../utils/ProductTypeTable";
+import { useGetAllProductsTypesQuery } from "../../features/products/products-service";
+import { useAddProductTypeMutation } from "../../features/products/products-service";
 
-function Products() {
-  const [productName, setProductName] = useState("");
-  const [productType, setProductType] = useState("");
+function ProductsTypes({ products }: any) {
+  const headers = ["Id", "Product Name", "CreatedAt", "ProductType"];
+
+  const [Name, settName] = useState("");
   let myProducts: any = [];
   const [show, setShow] = useState(false);
-  const { isSuccess, data, isLoading } = useGetAllProductsQuery();
-  const [addProduct] = useAddProductMutation();
+  const { isSuccess, data, isLoading } = useGetAllProductsTypesQuery();
+  const [addProductType] = useAddProductTypeMutation();
   if (isSuccess) {
     myProducts = data;
   }
-  //save product
+  //save product type
   const handleSaveProduct = () => {
     const product = {
-      Name: productName,
-      productType: +productType,
+      Name: Name,
     };
-    addProduct(product);
-    setProductName("");
-    setProductType("");
+    addProductType(product);
+    settName("");
     setShow(!show);
   };
 
   return (
     <div>
-      <h2 className="text text-center m-4 text-4xl">Product </h2>
+      <h2 className="text text-center m-4 text-4xl">Product Type</h2>
       <div className="max-w-2xl mx-auto ">
         <button className="text text-center m-4" onClick={() => setShow(!show)}>
-          Add Product <span className="m-4">&#10011;</span>
+          Add Product Type <span className="m-4">&#10011;</span>
         </button>
         {show ? (
           <div>
@@ -41,30 +39,17 @@ function Products() {
                   className="block mb-1"
                   htmlFor="forms-labelOverInputCode"
                 >
-                  Product Name
+                  Product Type Name
                 </label>
                 <input
-                  value={productName}
-                  onChange={(e) => setProductName(e.target.value)}
+                  value={Name}
+                  onChange={(e) => settName(e.target.value)}
                   className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
                   type="text"
                   placeholder="Name"
                 />
               </div>
-              <div>
-                <label
-                  className="block mb-1"
-                  htmlFor="forms-labelOverInputCode"
-                >
-                  Product Type
-                </label>
-                <input
-                  className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"
-                  type="number"
-                  placeholder="Type"
-                  onChange={(e) => setProductType(e.target.value)}
-                />
-              </div>
+
               <div>
                 <button
                   onClick={handleSaveProduct}
@@ -86,7 +71,7 @@ function Products() {
                 {isLoading ? (
                   "Loading..."
                 ) : (
-                  <Table Headers={headers} Data={myProducts} />
+                  <ProuductTypeTable Headers={headers} Data={myProducts} />
                 )}
               </div>
             </div>
@@ -97,4 +82,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default ProductsTypes;

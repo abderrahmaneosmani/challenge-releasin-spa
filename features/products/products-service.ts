@@ -6,12 +6,18 @@ export interface Product {
   Created_at: string;
   productType: number;
 }
+export interface ProductType {
+  id: number;
+  Name: string;
+  Created_at: string;
+  Updated_at: string;
+}
 export const productsApi = createApi({
   reducerPath: "products",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3000/v1/",
   }),
-  tagTypes: ["Product"],
+  tagTypes: ["Product", "ProductType"],
   endpoints: (builder) => ({
     getAllProducts: builder.query<Product[], void>({
       query: () => `products`,
@@ -37,10 +43,37 @@ export const productsApi = createApi({
       },
       invalidatesTags: ["Product"],
     }),
+    getAllProductsTypes: builder.query<Product[], void>({
+      query: () => `products-types`,
+      providesTags: ["ProductType"],
+    }),
+    AddProductType: builder.mutation({
+      query: (body) => {
+        return {
+          url: "products-types",
+          method: "POST",
+          body,
+        };
+      },
+      invalidatesTags: ["ProductType"],
+    }),
+    updateProductType: builder.mutation<ProductType, Omit<Product, "id">>({
+      query: (body) => {
+        return {
+          url: `products-types/${body.id}`,
+          method: "PATCH",
+          body: body,
+        };
+      },
+      invalidatesTags: ["ProductType"],
+    }),
   }),
 });
 export const {
   useGetAllProductsQuery,
   useAddProductMutation,
   useUpdateProductMutation,
+  useGetAllProductsTypesQuery,
+  useAddProductTypeMutation,
+  useUpdateProductTypeMutation,
 } = productsApi;

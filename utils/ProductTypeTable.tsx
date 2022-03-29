@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useUpdateProductMutation } from "../features/products/products-service";
-function Table({ Headers = [], Data = [] }: any) {
-  const [updateProduct] = useUpdateProductMutation();
+import { useUpdateProductTypeMutation } from "../features/products/products-service";
+function ProuductTypeTable({ Headers = [], Data = [] }: any) {
+  const [updateProductType] = useUpdateProductTypeMutation();
   const [target, setTarget] = useState(0);
   const [input, setInput] = useState("");
-  const [productType, setProductTyoe] = useState("");
 
   const handleEdit = (id: number) => {
     setTarget(id);
@@ -14,10 +13,10 @@ function Table({ Headers = [], Data = [] }: any) {
     const data: any = {
       id: id,
       Name: input,
-      productType: +productType,
     };
 
-    await updateProduct(data);
+    const c = await updateProductType(data);
+
     setTarget(0);
   };
   return (
@@ -66,18 +65,18 @@ function Table({ Headers = [], Data = [] }: any) {
                             {data["Created_at"]}
                           </td>
                           <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {data["productType"]}
+                            {data["Update_at"]}
                           </td>
                           <td
                             onClick={() => handleEdit(data["id"])}
-                            //  className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
+                            className="py-4 px-6 text-sm font-medium text-right whitespace-nowrap"
                           >
-                            <button
-                              type="button"
-                              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                            <a
+                              href="#"
+                              className="text-blue-600 dark:text-blue-500 hover:underline"
                             >
                               Edit
-                            </button>
+                            </a>
                           </td>
                         </tr>
                       ) : (
@@ -103,12 +102,7 @@ function Table({ Headers = [], Data = [] }: any) {
                             {data["Created_at"]}
                           </td>
                           <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            <input
-                              placeholder={data["productType"]}
-                              onChange={(evt) => {
-                                setProductTyoe(evt.target.value);
-                              }}
-                            />
+                            {data["Updated_at"]}
                           </td>
                           <td
                             onClick={() => handleEdit(data["id"])}
@@ -141,4 +135,4 @@ function Table({ Headers = [], Data = [] }: any) {
   );
 }
 
-export default Table;
+export default ProuductTypeTable;
