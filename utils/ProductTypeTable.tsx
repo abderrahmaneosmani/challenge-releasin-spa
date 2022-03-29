@@ -65,7 +65,7 @@ function ProuductTypeTable({ Headers = [], Data = [] }: any) {
                             {data["Created_at"]}
                           </td>
                           <td className="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {data["Update_at"]}
+                            {data["Updated_at"]}
                           </td>
                           <td
                             onClick={() => handleEdit(data["id"])}

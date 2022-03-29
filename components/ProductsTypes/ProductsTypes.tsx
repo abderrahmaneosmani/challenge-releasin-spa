@@ -4,7 +4,7 @@ import { useGetAllProductsTypesQuery } from "../../features/products/products-se
 import { useAddProductTypeMutation } from "../../features/products/products-service";
 
 function ProductsTypes({ products }: any) {
-  const headers = ["Id", "Product Name", "CreatedAt", "ProductType"];
+  const headers = ["Id", "Name", "CreatedAt", "updatedAt"];
 
   const [Name, settName] = useState("");
   let myProducts: any = [];
