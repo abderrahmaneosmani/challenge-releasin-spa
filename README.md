@@ -6,6 +6,7 @@ First, run the development server:
 
 ```bash
 git clone https://github.com/abderrahmaneosmani/challenge-releasin-spa.git
+cd challenge-releasin-spa
 npm i
 npm run dev
 # or
