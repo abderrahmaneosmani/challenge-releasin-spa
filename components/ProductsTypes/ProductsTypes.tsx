@@ -42,6 +42,7 @@ function ProductsTypes({ products }: any) {
                   Product Type Name
                 </label>
                 <input
+                  required
                   value={Name}
                   onChange={(e) => settName(e.target.value)}
                   className="w-full h-10 px-3 text-base placeholder-gray-600 border rounded-lg focus:shadow-outline"

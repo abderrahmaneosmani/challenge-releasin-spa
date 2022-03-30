@@ -12,7 +12,7 @@ function Layout({ children }: any) {
           className="m-4"
         />
         <h1 className="m-4 text-inherit	text-5xl text-center">
-          Realeasin Challenge
+          Releasin Challenge
         </h1>
       </div>
       {children}
