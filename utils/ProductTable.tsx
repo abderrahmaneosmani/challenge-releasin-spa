@@ -24,10 +24,10 @@ function Table({ Headers = [], Data = [] }: any) {
     <div>
       <div className="max-w-2xl mx-auto">
         <div className="flex flex-col">
-          <div className="overflow-x-auto shadow-md sm:rounded-lg">
+          <div className="overflow-x-auto  p-4 shadow-md  sm:rounded-lg">
             <div className="inline-block min-w-full align-middle">
               <div className="overflow-hidden ">
-                <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+                <table className="min-w-full  divide-y divide-gray-200 table-fixed dark:divide-gray-700">
                   <thead className="bg-gray-100 dark:bg-gray-700">
                     <tr>
                       {Headers.map((header: any) => (
